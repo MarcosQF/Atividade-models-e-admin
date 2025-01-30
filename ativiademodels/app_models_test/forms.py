@@ -1,5 +1,7 @@
+from xml.dom import ValidationErr
 from django import forms
 from .models import Product, Category, Suplier
+from django.core.validators import RegexValidator
 
 class SuplierForm(forms.ModelForm):
     class Meta:
@@ -26,3 +28,5 @@ class ProductForm(forms.ModelForm):
 
     suplier = forms.ModelChoiceField(queryset=Suplier.objects.all(), empty_label="Selecione um fornecedor")
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
+
+   

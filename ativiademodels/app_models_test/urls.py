@@ -3,11 +3,11 @@ from . import views
 
 
 urlpatterns = [
-    path('supliers/list', views.supliers),
-    path('products/list', views.products), 
-    path('categories/list', views.category),
+    path('supliers/list', views.SupliersListView.as_view(),name='suplier_list'),
+    path('products/list', views.ProductsListView.as_view(),name='product_list'), 
+    path('categories/list', views.CategoryListView.as_view(),name='category_list'),
 
-    path('supliers/create/', views.suplier_create, name='suplier_create'),
-    path('categories/create/', views.category_create, name='category_create'),
-    path('products/create/', views.product_create, name='product_create'),
+    path('supliers/create/', views.SuplierCreate.as_view(), name='suplier_create'),
+    path('categories/create/', views.CategoryCreate.as_view(), name='category_create'),
+    path('products/create/', views.ProductCreate.as_view(), name='product_create'),
 ]

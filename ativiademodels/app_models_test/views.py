@@ -1,50 +1,40 @@
 from django.shortcuts import render
 from .models import Suplier, Product, Category
 from .forms import SuplierForm, CategoryForm, ProductForm
-
+from django.views.generic import ListView,CreateView
+from django.urls import reverse_lazy
 # Create your views here.
 
-def supliers(request):
-    supliers = Suplier.objects.all()
-    context = {'supliers': supliers}
-    return render(request, 'app_models_test/supliers.html', context)
+class SupliersListView(ListView):
+  model = Suplier
+  template_name = 'app_models_test/supliers.html'
+  context_object_name = 'supliers'
 
-def products(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'app_models_test/products.html', context)
+class ProductsListView(ListView):
+  model = Product
+  template_name = 'app_models_test/products.html'
+  context_object_name = 'products'
 
-def category(request):
-    category = Category.objects.all()
-    context = {'category': category}
-    return render(request, 'app_models_test/category.html',context)
+class CategoryListView(ListView):
+  model = Category
+  template_name = 'app_models_test/category.html'
+  context_object_name = 'category'
 
-def suplier_create(request):
-    if request.method == 'POST':
-        form = SuplierForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = SuplierForm()
-    else:
-        form = SuplierForm()
-    return render(request, 'app_models_test/suplier_forms.html', {'form': form})
+class SuplierCreate(CreateView):
+    template_name= "app_models_test/suplier_forms.html"
+    model = Suplier
+    form_class = SuplierForm
+    success_url = reverse_lazy("suplier_list")
+    
+class CategoryCreate(CreateView):
+    template_name= "app_models_test/category_forms.html"
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy("category_list")
 
-def category_create(request):
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = CategoryForm()
-    else:
-        form = CategoryForm()
-    return render(request, 'app_models_test/category_forms.html', {'form': form})
+class ProductCreate(CreateView):
+    template_name= "app_models_test/product_forms.html"
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy("product_list")
 
-def product_create(request):
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = ProductForm()
-    else:
-        form = ProductForm()
-    return render(request, 'app_models_test/product_forms.html', {'form': form})
