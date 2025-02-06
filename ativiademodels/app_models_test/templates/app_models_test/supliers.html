@@ -1,8 +1,10 @@
 <body>
-    <h1>Hello world de template!</h1>
+    <h1> Fornecedores</h1>
 
     {% for suplier in supliers %}
     <h2>{{suplier.suplier_name}}</h2>
     {% endfor %}
- 
+    <div>
+    <a href="{% url 'suplier_create' %}" >Criar Fornecedor</a>
+    </div>
 </body>

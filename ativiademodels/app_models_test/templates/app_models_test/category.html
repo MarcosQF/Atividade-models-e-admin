@@ -1,7 +1,12 @@
 <body>
-    <h1>Hello world de template!</h1>
+    <h1>Categorias</h1>
 
     {% for categoria in category %}
     <h2>{{categoria.category_name}}</h2>
     {% endfor %}
+
+    <div>
+        <a href="{% url 'category_create' %}" >Criar Categoria</a>
+    </div>
+ 
  </body>
