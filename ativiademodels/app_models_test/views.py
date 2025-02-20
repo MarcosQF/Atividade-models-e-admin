@@ -3,6 +3,7 @@ from .models import Suplier, Product, Category
 from .forms import SuplierForm, CategoryForm, ProductForm
 from django.views.generic import ListView,CreateView,TemplateView
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 class IndexView(TemplateView):
   template_name = 'app_models_test/index.html'
@@ -38,6 +39,13 @@ class ProductCreate(CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("product_list")
+
+    def form_valid(self, form):
+
+        response = super().form_valid(form)
+        messages.success(self.request, "Produto criado com sucesso!")
+        return response
+
 
 class ProductsListView(ListView):
   model = Product

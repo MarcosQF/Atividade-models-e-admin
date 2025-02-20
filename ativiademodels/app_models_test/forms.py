@@ -19,7 +19,7 @@ class CategoryForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['suplier', 'categories', 'product_name', 'product_code', 'description', 'price', 'quantity']
+        fields = ['suplier', 'categories', 'product_name','image', 'product_code', 'description', 'price', 'quantity']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'price': forms.NumberInput(attrs={'step': 0.01}),

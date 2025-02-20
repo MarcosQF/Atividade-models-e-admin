@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator, MinLengthValidator,MinValueVa
 class Product(models.Model):
    suplier = models.ForeignKey('Suplier', on_delete=models.CASCADE)
    categories = models.ManyToManyField('Category', related_name='questions')
-   
+   image = models.ImageField('Imagem Do Produto',upload_to='products', default=None)
    alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
    product_name = models.CharField('Nome',max_length = 40, blank = False, validators=[MinLengthValidator(3)])
